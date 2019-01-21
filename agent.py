@@ -41,8 +41,8 @@ class Agent(object):
 
     def h(self,l,U):
         """
-        l : minimum rank, from 1 to N
-        U : list of unallocated items
+        @l : minimum rank, from 1 to N
+        @U : list of unallocated items
         """
         H=[]
         for resource in U :
@@ -50,11 +50,23 @@ class Agent(object):
                 H.append(resource)
         #print("h : U="+str(U)+", l="+str(l)+",H="+str(H))
         return H        
+
+    def lastU(self,U):
+        """
+        @U : list of unallocated items
+        """
+        for item in reversed(self.p) :
+            if item in U : 
+                return item
+
+
         
     #TODO: replace by dropItems      
 
 if __name__ == '__main__':
     a = Agent([1,2,3,4,5,6],[])
+
+    print(a.lastU([1,2,3,6]))
 
     #a.h(3,[1,2,3,4,5,6])
 
