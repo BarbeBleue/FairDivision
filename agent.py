@@ -42,6 +42,14 @@ class Agent(object):
     def dropItems(self):
         self.hold=[]
         self.current_u = 0
+
+    def h(self,l,U):
+        H=[]
+        for item in U:
+            if self.u[item]<=l:
+                H.append(item)
+        return H
+
         
     #TODO: replace by dropItems        
     
