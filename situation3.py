@@ -1,5 +1,6 @@
 
 import itertools
+from agent import *
 
 class Situation3:
 
@@ -7,14 +8,23 @@ class Situation3:
 		if n_items%3!=0:
 			print("Warning: A problem has to be of proportional size regarding the number of agents")
 			return
-		self._n_agents=3
+		self._agents=[[],[],[]]
+		self.createAgents()
 		self._items = [i for i in range(1,n_items+1,1)]
-		self._allocations=self.generateAlloc()
+		self._allocations=self.generateAllAlloc()
 		self._preferences=list(itertools.permutations(self._items))
-		self._problem=0 
+		print(self._preferences)
 
-	def generateAlloc(self):
-		l1=list(itertools.combinations(self._items,n_items/self._n_agents))
+	def createAgents(pref=0):
+		if pref==0:
+			u_l=items[:]
+			u_l=[i[:]]
+			for i in range(3):
+				self.agent.append(Agent(u_l,[]))
+				random.shuffle(u_l)
+
+	def generateAllAlloc(self):
+		l1=list(itertools.combinations(self._items,n_items/len(self._agents)))
 		l2=[]
 		for i in l1:
 			for j in l1:
@@ -30,9 +40,9 @@ class Situation3:
 
 	def printAlloc(self,n):
 		if n<len(self._allocations):
-			for j in range(0,self._n_agents-1):
+			for j in range(0,len(self._agents)-1):
 				print(("agent "+str(j+1)+":"+str(self._allocations[n][j])))
-			print("agent "+str(self._n_agents)+":"+str(self.lastAlloc(n)))
+			print("agent "+str(len(self._agents))+":"+str(self.lastAlloc(n)))
 
 	def lastAlloc(self,n):
 		"""
@@ -46,10 +56,10 @@ class Situation3:
 		return tuple([i for i in self._items if i not in l])
 
 	def infos(self):
-		print("Number of agents="+str(prob._n_agents))
+		print("Number of agents="+str(len(prob._agents)))
 		print("Number of items="+str(len(prob._items)))
 		print("Items="+str(prob._items))
-		print("Allocations="+str(prob._allocations))
+		print("Possible Allocations="+str(prob._allocations))
 
 if __name__ == '__main__':
 	n_items=6
