@@ -17,8 +17,7 @@ class Situation3:
 
 	def createAgents(pref=0):
 		if pref==0:
-			u_l=items[:]
-			u_l=[i[:]]
+			u_l=self._items[:]
 			for i in range(3):
 				self.agent.append(Agent(u_l,[]))
 				random.shuffle(u_l)

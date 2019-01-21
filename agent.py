@@ -1,22 +1,20 @@
 
 class Agent(object): 
     
-    def __init__(self,utility,resources):
+    def __init__(self,preference,resources):
         '''
         '''
-        self.u= utility # dictionary of utility for resources
+        self.p = preference # list of agent preferences, from high to low preferences
         self.hold = resources # list of resources held by agent
-        self.current_u = sum([self.u[r] for r in resources]) # current utility enjoyed by agent
-        
+
     def __str__(self):
-        return str(self.u)
+        return str(self.p)
         
     def getItem(self,r):
         '''
         @r: a single item
         '''
         self.hold.append(r)
-        self.current_u += self.u[r]
         return
         
     def getItems(self,lr):
@@ -27,29 +25,37 @@ class Agent(object):
             self.getItem(r)
         return
         
-    def giveItem(self,r):
+    def dropItem(self,r):
         if r not in self.hold:
             print ("agent ", self, " does not hold ", r, "!!!")
         self.hold.remove(r)
-        self.current_u -= self.u[r]
         return
         
-    def giveItems(self,lr):
+    def dropItems(self,lr):
         for r in lr:
-            self.giveItem(r)
+            self.dropItem(r)
         return
         
-    def dropItems(self):
+    def clearItems(self):
         self.hold=[]
-        self.current_u = 0
 
     def h(self,l,U):
+        """
+        l : minimum rank, from 1 to N
+        U : list of unallocated items
+        """
         H=[]
-        for item in U:
-            if self.u[item]<=l:
-                H.append(item)
-        return H
-
+        for resource in U :
+            if resource in self.p[0:l] :
+                H.append(resource)
+        #print("h : U="+str(U)+", l="+str(l)+",H="+str(H))
+        return H        
         
-    #TODO: replace by dropItems        
+    #TODO: replace by dropItems      
+
+if __name__ == '__main__':
+    a = Agent([1,2,3,4,5,6],[])
+
+    #a.h(3,[1,2,3,4,5,6])
+
     
