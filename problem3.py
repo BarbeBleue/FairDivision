@@ -144,8 +144,8 @@ class Problem3:
 
 
 if __name__ == '__main__':
-	prob=Problem3(6)
-	p=[(1,2,3,4,5,6),(6,4,2,1,3,5),(3,2,4,1,5,6)]
+	prob=Problem3(9)
+	p=[(1,2,3,4,5,6,7,8,9),(6,4,8,2,7,1,3,9,5),(9,3,2,7,4,1,8,5,6)]
 	d={}
 	for i in range(5):
 		d[prob._allocations.keys()[i]]=[0]*7
@@ -155,4 +155,6 @@ if __name__ == '__main__':
 	print(prob._allocations)
 
 	print(prob)
+	print("---")
+	print(len(prob._allocations))
 	
