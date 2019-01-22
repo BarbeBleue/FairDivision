@@ -2,14 +2,14 @@
 class Agent(object): 
     
 
-    def __init__(self,preference,resources):
+    def __init__(self,preference=[],resources=[]):
         '''
         '''
         self.p = preference # list of agent preferences, from high to low preferences
         self.hold = resources # list of resources held by agent
 
     def __str__(self):
-        string="Utilities: "+str(self.p)
+        string="Preferences: "+str(self.p)
         string+="\nRessources: "+str(self.hold)
         return string
         
