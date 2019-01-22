@@ -1,6 +1,7 @@
 
 class Agent(object): 
     
+
     def __init__(self,preference,resources):
         '''
         '''
@@ -8,7 +9,9 @@ class Agent(object):
         self.hold = resources # list of resources held by agent
 
     def __str__(self):
-        return str(self.p)
+        string="Utilities: "+str(self.p)
+        string+="\nRessources: "+str(self.hold)
+        return string
         
     def getItem(self,r):
         '''
