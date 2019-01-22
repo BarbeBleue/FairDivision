@@ -18,6 +18,7 @@ class Situation3:
 		self._maxBordaSum=0
 		self._maxminBorda=0
 
+
 	def createAgents(self):
 		for i in range(3):
 			self._agents.append(Agent())

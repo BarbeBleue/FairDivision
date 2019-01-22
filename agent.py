@@ -1,15 +1,15 @@
 
 class Agent(object): 
     
-    def __init__(self,utility=[],resources=[]):
+
+    def __init__(self,preference,resources):
         '''
         '''
-        self.u= utility # dictionary of utility for resources
+        self.p = preference # list of agent preferences, from high to low preferences
         self.hold = resources # list of resources held by agent
-        self.current_u = sum([self.u[r] for r in resources]) # current utility enjoyed by agent
-        
+
     def __str__(self):
-        string="Utilities: "+str(self.u)
+        string="Utilities: "+str(self.p)
         string+="\nRessources: "+str(self.hold)
         return string
         
@@ -18,7 +18,6 @@ class Agent(object):
         @r: a single item
         '''
         self.hold.append(r)
-        self.current_u += self.u[r-1]
         return
         
     def getItems(self,lr):
@@ -33,7 +32,6 @@ class Agent(object):
         if r not in self.hold:
             print ("agent ", self, " does not hold ", r, "!!!")
         self.hold.remove(r)
-        self.current_u -= self.u[r]
         return
         
     def dropItems(self,lr):
@@ -43,15 +41,36 @@ class Agent(object):
         
     def clearItems(self):
         self.hold=[]
-        self.current_u = 0
 
     def h(self,l,U):
+        """
+        @l : minimum rank, from 1 to N
+        @U : list of unallocated items
+        """
         H=[]
-        for item in U:
-            if self.u[item-1]<=l:
-                H.append(item)
-        return H
+        for resource in U :
+            if resource in self.p[0:l] :
+                H.append(resource)
+        #print("h : U="+str(U)+", l="+str(l)+",H="+str(H))
+        return H        
+
+    def lastU(self,U):
+        """
+        @U : list of unallocated items
+        """
+        for item in reversed(self.p) :
+            if item in U : 
+                return item
+
 
         
-    #TODO: replace by dropItems        
+    #TODO: replace by dropItems      
+
+if __name__ == '__main__':
+    a = Agent([1,2,3,4,5,6],[])
+
+    print(a.lastU([1,2,3,6]))
+
+    #a.h(3,[1,2,3,4,5,6])
+
     
