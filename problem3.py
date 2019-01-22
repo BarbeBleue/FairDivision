@@ -1,6 +1,6 @@
 from bordaProperties import *
 import itertools
-import algorithm
+from algorithm import *
 
 # INDEX OF ALLOCATION LIST
 ## properties
@@ -28,6 +28,7 @@ class Problem3:
 		if len(pref)>0 and len(pref)!=3:
 			print("Warning! pref has to be of size 3!")
 		self._current_p=pref
+		self._nb_items = n_items
 		self._items=[i for i in range(1,n_items+1,1)]
 		self._allocations={}
 		self.generateAllAlloc()
@@ -58,7 +59,7 @@ class Problem3:
 			self._agents.append(Agent())
 
 	def generateAllAlloc(self):
-		l1=list(itertools.combinations(self._items,2))
+		l1=list(itertools.combinations(self._items,self._nb_items/3))
 		for i in l1:
 			for j in l1:
 				flag = 0
@@ -70,6 +71,10 @@ class Problem3:
 					l=tuple([k for k in range(1,7) if k not in i+j])
 					self._allocations[i,j,l]=[0]*7
 					self._allocations[j,i,l]=[0]*7
+
+	def reset(self):
+		for alloc in self._allocations:
+			self._allocations[alloc] = [0]*7
 
 	def generateBordaProperties(self):
 		self.generateBordaScores()
@@ -154,9 +159,15 @@ class Problem3:
 			print("Invalid algo : "+str(algo))
 
 		for alloc in allocs :
+			#print(type(alloc))
+			#print(alloc)
+
 			self._allocations[alloc][algo] = 1
 
-	
+	def solve_all(self):
+		self.solve(OS)
+		self.solve(BU)
+
 
 if __name__ == '__main__':
 	prob=Problem3(6)

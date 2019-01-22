@@ -23,7 +23,9 @@ def OS_3_rec(agents, U, l):
 	#print("in os_3_rec : "+str(l))
 
 	if not U : #Allocation found
-		res = [(tuple(agents[0].hold),tuple(agents[1].hold),tuple(agents[2].hold))]
+		for a in agents :
+			a.hold.sort()
+		res = [(tuple(agents[0].hold), tuple(agents[1].hold),tuple(agents[2].hold))]
 		#print("found:"+str(res))
 		return res
 
@@ -94,7 +96,9 @@ def bottomUp_3_rec(agents,U,direction):
 	#print("U="+str(U))
 
 	if not U : #Allocation found
-		res = [(tuple(agents[0].hold),tuple(agents[1].hold),tuple(agents[2].hold))]
+		for a in agents :
+			a.hold.sort()
+		res = [(tuple(agents[0].hold), tuple(agents[1].hold),tuple(agents[2].hold))]
 		#print("found:"+str(res))
 		return res
 
