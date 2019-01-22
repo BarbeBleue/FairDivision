@@ -1,7 +1,7 @@
 
 class Agent(object): 
     
-    def __init__(self,utility,resources):
+    def __init__(self,utility=[],resources=[]):
         '''
         '''
         self.u= utility # dictionary of utility for resources
@@ -9,14 +9,16 @@ class Agent(object):
         self.current_u = sum([self.u[r] for r in resources]) # current utility enjoyed by agent
         
     def __str__(self):
-        return str(self.u)
+        string="Utilities: "+str(self.u)
+        string+="\nRessources: "+str(self.hold)
+        return string
         
     def getItem(self,r):
         '''
         @r: a single item
         '''
         self.hold.append(r)
-        self.current_u += self.u[r]
+        self.current_u += self.u[r-1]
         return
         
     def getItems(self,lr):
@@ -27,26 +29,26 @@ class Agent(object):
             self.getItem(r)
         return
         
-    def giveItem(self,r):
+    def dropItem(self,r):
         if r not in self.hold:
             print ("agent ", self, " does not hold ", r, "!!!")
         self.hold.remove(r)
         self.current_u -= self.u[r]
         return
         
-    def giveItems(self,lr):
+    def dropItems(self,lr):
         for r in lr:
-            self.giveItem(r)
+            self.dropItem(r)
         return
         
-    def dropItems(self):
+    def clearItems(self):
         self.hold=[]
         self.current_u = 0
 
     def h(self,l,U):
         H=[]
         for item in U:
-            if self.u[item]<=l:
+            if self.u[item-1]<=l:
                 H.append(item)
         return H
 
