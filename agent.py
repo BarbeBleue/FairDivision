@@ -2,7 +2,7 @@
 class Agent(object): 
     
 
-    def __init__(self,preference,resources):
+    def __init__(self,preference=[],resources=[]):
         '''
         '''
         self.p = preference # list of agent preferences, from high to low preferences
