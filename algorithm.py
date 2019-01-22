@@ -1,4 +1,4 @@
-#coding : utf-8
+# coding: utf-8
 import copy
 
 from agent import Agent
@@ -24,7 +24,7 @@ def OS_3_rec(agents, U, l):
 
 	if not U : #Allocation found
 		res = [(tuple(agents[0].hold),tuple(agents[1].hold),tuple(agents[2].hold))]
-		print("found:"+str(res))
+		#print("found:"+str(res))
 		return res
 
 	alloc = []
@@ -126,13 +126,15 @@ def trump_3(agents):
 	print("Trump for 3 agents")
 
 
+
+
+
 if __name__ == '__main__':
 
 	agents = []
 	agents.append(Agent([1,2,3,4,5,6],[]))
 	agents.append(Agent([3,4,1,5,6,2],[]))
-	agents.append(Agent([3,2,1,5,4,6],[]))
-
+	agents.append(Agent([3,2,5,1,4,6],[]))
 	
 	#res = OS_3(agents)
 	res = bottomUp_3(agents)

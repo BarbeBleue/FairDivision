@@ -1,5 +1,6 @@
 from bordaProperties import *
 import itertools
+import algorithm
 
 # INDEX OF ALLOCATION LIST
 ## properties
@@ -142,6 +143,20 @@ class Problem3:
 		for i in range(3):
 			self._agents[i].p=l_pref[i]
 
+	def solve(self, algo):
+		if algo == OS:
+			allocs = set(OS_3(self._agents))
+
+		elif algo == BU :
+			allocs = set(bottomUp_3(self._agents))
+
+		else :
+			print("Invalid algo : "+str(algo))
+
+		for alloc in allocs :
+			self._allocations[alloc][algo] = 1
+
+	
 
 if __name__ == '__main__':
 	prob=Problem3(9)

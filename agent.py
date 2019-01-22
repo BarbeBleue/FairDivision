@@ -62,7 +62,6 @@ class Agent(object):
             if item in U : 
                 return item
 
-
         
     #TODO: replace by dropItems      
 
