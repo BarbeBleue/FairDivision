@@ -26,7 +26,11 @@ class Problem3:
     '''
 	def __init__(self,n_items,pref=[]):
 		if len(pref)>0 and len(pref)!=3:
-			print("Warning! pref has to be of size 3!")
+			print("Warning! pref list has to be of size 3!")
+		else:
+			for p in pref:
+				if len(p)!=n_items:
+					print("Warning! each individual pref has to be of size n_items!")
 		self._current_p=pref
 		self._items=[i for i in range(1,n_items+1,1)]
 		self._allocations={}
@@ -45,6 +49,7 @@ class Problem3:
 	def __str__(self):
 		string="Current set of preferences: "+str(self._current_p)
 		string+="\nItems to share: "+str(self._items)
+		string+="\nAllocations: "+str(self._allocations)
 		string+="\nMaximum Borda Score sum: "+str(self._maxBordaSum)
 		string+="\nMaximum Minimum Borda Score: "+str(self._maxminBorda)
 		string+="\nNumber of BS : "+str(self._n_BS)
@@ -72,6 +77,11 @@ class Problem3:
 					self._allocations[j,i,l]=[0]*7
 
 	def generateBordaProperties(self):
+		self._maxBordaSum=0
+		self._maxminBorda=0
+		self._n_BS=0
+		self._n_BE=0
+		self._n_BM=0
 		self.generateBordaScores()
 		self.propBS()
 		self.propBE()
@@ -159,17 +169,18 @@ class Problem3:
 	
 
 if __name__ == '__main__':
-	prob=Problem3(9)
-	p=[(1,2,3,4,5,6,7,8,9),(6,4,8,2,7,1,3,9,5),(9,3,2,7,4,1,8,5,6)]
-	d={}
+	prob=Problem3(6)
+	print(prob)
+	#p=[(1,2,3,4,5,6,7,8,9,10,11,12),(6,4,8,2,7,1,3,9,5,10,11,12),(9,3,2,7,4,1,8,5,6,10,11,12)]
+	"""d={}
 	for i in range(5):
 		d[prob._allocations.keys()[i]]=[0]*7
 	#prob._allocations=d
 	prob.setPreferences(p)
 	prob.generateBordaProperties()
-	print(prob._allocations)
+	#print(prob._allocations)
 
 	print(prob)
 	print("---")
-	print(len(prob._allocations))
+	print(len(prob._allocations))"""
 	
