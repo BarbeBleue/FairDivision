@@ -10,7 +10,7 @@ def OS_3(agents):
 	Returns all possible allocations.
 	"""
 
-	print("OS for 3 agents")
+	#print("OS for 3 agents")
 	return OS_3_rec(agents, U=[1,2,3,4,5,6], l=1)
 
 	
@@ -23,7 +23,9 @@ def OS_3_rec(agents, U, l):
 	#print("in os_3_rec : "+str(l))
 
 	if not U : #Allocation found
-		res = [(tuple(agents[0].hold),tuple(agents[1].hold),tuple(agents[2].hold))]
+		for a in agents :
+			a.hold.sort()
+		res = [(tuple(agents[0].hold), tuple(agents[1].hold),tuple(agents[2].hold))]
 		#print("found:"+str(res))
 		return res
 
@@ -76,7 +78,7 @@ def bottomUp_3(agents):
 	"""
 	Bottom up algorithm for 3 agents
 	"""
-	print("BottomUp for 3 agents")
+	#print("BottomUp for 3 agents")
 
 	alloc = []
 	alloc += bottomUp_3_rec(copy.deepcopy(agents),[1,2,3,4,5,6],0)
@@ -94,7 +96,9 @@ def bottomUp_3_rec(agents,U,direction):
 	#print("U="+str(U))
 
 	if not U : #Allocation found
-		res = [(tuple(agents[0].hold),tuple(agents[1].hold),tuple(agents[2].hold))]
+		for a in agents :
+			a.hold.sort()
+		res = [(tuple(agents[0].hold), tuple(agents[1].hold),tuple(agents[2].hold))]
 		#print("found:"+str(res))
 		return res
 
