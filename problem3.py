@@ -59,7 +59,8 @@ class Problem3:
 			self._agents.append(Agent())
 
 	def generateAllAlloc(self):
-		l1=list(itertools.combinations(self._items,self._nb_items/3))
+		l1=list(itertools.combinations(self._items,int(self._nb_items/3)))
+		#print(l1)
 		for i in l1:
 			for j in l1:
 				flag = 0
@@ -164,7 +165,7 @@ class Problem3:
 
 			self._allocations[alloc][algo] = 1
 
-	def solve_all(self):
+	def solve_all(self,verbose=False):
 		self.solve(OS)
 		self.solve(BU)
 

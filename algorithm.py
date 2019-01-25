@@ -10,7 +10,7 @@ def OS_3(agents):
 	Returns all possible allocations.
 	"""
 
-	print("OS for 3 agents")
+	#print("OS for 3 agents")
 	return OS_3_rec(agents, U=[1,2,3,4,5,6], l=1)
 
 	
@@ -78,7 +78,7 @@ def bottomUp_3(agents):
 	"""
 	Bottom up algorithm for 3 agents
 	"""
-	print("BottomUp for 3 agents")
+	#print("BottomUp for 3 agents")
 
 	alloc = []
 	alloc += bottomUp_3_rec(copy.deepcopy(agents),[1,2,3,4,5,6],0)
