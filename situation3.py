@@ -256,14 +256,53 @@ class Situation3:
 
 
 if __name__ == '__main__':
-	n_items=6
-	sit=Situation3(n_items)
+	"""
+	n_items=9
+	BE=0
+	BS=0
+	BM=0
+	"""
+	#for n_items in range(6,13,3):
+	sit=Situation3(n_items=6)
 	#print(sit._problem)
 	#cProfile.run('sit.run(nb_iter=5000,verbose=False)')
-	sit.run(nb_iter=-1,verbose=True)
+	sit.run(nb_iter=100,verbose=False)
 	sit.printResults()
 	sit.printResultsAllProperties()
 	sit.loadResults("save.csv")
 	sit.printResults()
 	sit.printResultsAllProperties()
+
+	#MAEVA
+	"""
+	#print(len(sit._problem._allocations))
+	l=len(sit._preferences)
+	print(l)
+	#print(l*l)
+	i=0
+	p1=sit._preferences[0]
+	for p2 in sit._preferences:
+		for p3 in sit._preferences:
+			i+=1
+			sit._problem.setPreferences([p1,p2,p3])
+			sit._problem.generateBordaProperties()
+			BS+=sit._problem._n_BS
+			BE+=sit._problem._n_BE
+			BM+=sit._problem._n_BM
+
+			#print("i="+str(i))
+		#print(sit._problem)
+		
+		print("i="+str(i))
+		print("BS="+str(BS))
+		print("BE="+str(BE))
+		print("BM="+str(BM))
 	
+	BS=BS/(i*90.0)*100
+	BE=BE/(i*90.0)*100
+	BM=BM/(i*90.0)*100
+	print("BS="+str(BS))
+	print("BE="+str(BE))
+	print("BM="+str(BM))
+	"""
+	#print(sit._problem)

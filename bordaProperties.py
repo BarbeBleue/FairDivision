@@ -12,10 +12,6 @@ def bordaParetoOptimal(l_agents,alloc):
 	for a in l_agents:
 		score += bordaScore(a)
 
-
-def maximalBordaSum(agent):
-		return
-
 def bordaEnvy(l_agents):
 	N = len(l_agents[0].p) #total number of items
 	#print("N="+str(N))
