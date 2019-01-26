@@ -161,7 +161,7 @@ class Problem3:
 
 		for alloc in allocs :
 			#print(type(alloc))
-			#print(alloc)
+			#print(algo," : ",alloc)
 
 			self._allocations[alloc][algo] = 1
 

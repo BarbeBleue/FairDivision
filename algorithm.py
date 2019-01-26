@@ -2,6 +2,7 @@
 import copy
 
 from agent import Agent
+from collections import deque
 
 
 def OS_3(agents):
@@ -80,9 +81,15 @@ def bottomUp_3(agents):
 	"""
 	#print("BottomUp for 3 agents")
 
+	order_combi = combinations([0,1,2],[0,1,2],[0,1,2])
 	alloc = []
-	alloc += bottomUp_3_rec(copy.deepcopy(agents),[1,2,3,4,5,6],0)
-	alloc += bottomUp_3_rec(copy.deepcopy(agents),[1,2,3,4,5,6],1)
+	for c in order_combi:
+		order_agents = []
+		for i in c:
+			order_agents.append(agents[i])
+		alloc += bottomUp_3_rec(copy.deepcopy(order_agents),[1,2,3,4,5,6],0)
+		alloc += bottomUp_3_rec(copy.deepcopy(order_agents),[1,2,3,4,5,6],1)
+
 	return alloc
 
 
