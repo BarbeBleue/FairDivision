@@ -11,7 +11,6 @@ def OS_3(agents):
 	Returns all possible allocations.
 	"""
 
-	#print("OS for 3 agents")
 	return OS_3_rec(agents, U=[1,2,3,4,5,6], l=1)
 
 	
@@ -79,7 +78,6 @@ def bottomUp_3(agents):
 	"""
 	Bottom up algorithm for 3 agents
 	"""
-	#print("BottomUp for 3 agents")
 
 	order_combi = combinations([0,1,2],[0,1,2],[0,1,2])
 	alloc = []
@@ -106,7 +104,6 @@ def bottomUp_3_rec(agents,U,direction):
 		for a in agents :
 			a.hold.sort()
 		res = [(tuple(agents[0].hold), tuple(agents[1].hold),tuple(agents[2].hold))]
-		#print("found:"+str(res))
 		return res
 
 	alloc = []
@@ -126,19 +123,6 @@ def bottomUp_3_rec(agents,U,direction):
 	alloc += bottomUp_3_rec(copy.deepcopy(agents),copy.copy(U),1)
 
 	return alloc
-
-def trump_3(agents):
-	"""
-	Trump algorithm for 3 agents
-
-	Pb : comment adapter pour 3 agents ?? 
-		lorsque A donne le pire des meilleurs B à B, C peut être jaloux.
-	"""
-	print("Trump for 3 agents")
-
-
-
-
 
 if __name__ == '__main__':
 

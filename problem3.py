@@ -16,13 +16,14 @@ class Problem3:
 	''' 
 	a problem with 3 agents is defined by: 
         - a _current_pref of the current preferences of the 3 agents analyzed
+        - a number _nb_items of items to allocate
         - a dictionary _allocations of all the possible allocations with corresponding properties and algorithms which find them, 
-        - a list _agents of 3 Agents
+        - a list _agents of Agents
         - a value _maxBordaSum equal to the maximum Borda sum you can get regarding the current set of preferences
         - a value _maxminBorda equal to the maximal minimum Borda score you can get regarding the current set of preferences
-        - an initial allocation of resources
-        - a visibility topology (symmetric)
-        - an exchange topology (directed)
+        + an initial allocation of resources
+        + a visibility topology (symmetric)
+        + an exchange topology (directed)
     '''
 	def __init__(self,n_items,pref=[]):
 		if len(pref)>0 and len(pref)!=3:
@@ -60,10 +61,16 @@ class Problem3:
 		return string
 
 	def createAgents(self):
+		"""
+		Create 3 empty Agents
+		"""
 		for i in range(3):
 			self._agents.append(Agent())
 
 	def generateAllAlloc(self):
+		"""
+		Generate all the combinaitions of allocations possibles considerint a 3 agents problem
+		"""
 		l1=list(itertools.combinations(self._items,int(self._nb_items/3)))
 		#print(l1)
 		for i in l1:
@@ -79,10 +86,16 @@ class Problem3:
 					self._allocations[j,i,l]=[0]*7
 
 	def reset(self):
+		"""
+		Reset the allocation dictionnary, clear Borda Properties and Algorithms
+		"""
 		for alloc in self._allocations:
 			self._allocations[alloc] = [0]*7
 
 	def generateBordaProperties(self):
+		"""
+		Associate Borda Properties to all the allocations
+		"""
 		self._maxBordaSum=0
 		self._maxminBorda=0
 		self._n_BS=0
@@ -94,6 +107,9 @@ class Problem3:
 		self.propBM()
 
 	def generateBordaScores(self):
+		"""
+		Calculate and store Borda Scores for all allocations considering a set of preferences for the agents
+		"""
 		self.setPreferences(self._current_p)
 		for alloc in self._allocations.keys():
 			self.setAllocations(alloc)
@@ -113,7 +129,7 @@ class Problem3:
 
 	def propBS(self):
 		"""
-		maximal Borda sum property
+		Maximal Borda sum property
 		"""
 		for alloc in self._allocations.keys():
 			if self._allocations[alloc][0]==self._maxBordaSum:
@@ -121,6 +137,9 @@ class Problem3:
 				self._n_BS+=1
 
 	def propBE(self):
+		"""
+		Borda-envy-free property
+		"""
 		for alloc in self._allocations.keys():
 			self.setAllocations(alloc)
 			if bordaEnvy(self._agents):
@@ -130,7 +149,7 @@ class Problem3:
 
 	def propBM(self):
 		"""
-		max-min Borda property
+		Max-min Borda property
 		"""
 		for alloc in self._allocations.keys():
 			if self._allocations[alloc][1]==self._maxminBorda:
@@ -183,16 +202,4 @@ class Problem3:
 if __name__ == '__main__':
 	prob=Problem3(6)
 	print(prob)
-	#p=[(1,2,3,4,5,6,7,8,9,10,11,12),(6,4,8,2,7,1,3,9,5,10,11,12),(9,3,2,7,4,1,8,5,6,10,11,12)]
-	"""d={}
-	for i in range(5):
-		d[prob._allocations.keys()[i]]=[0]*7
-	#prob._allocations=d
-	prob.setPreferences(p)
-	prob.generateBordaProperties()
-	#print(prob._allocations)
-
-	print(prob)
-	print("---")
-	print(len(prob._allocations))"""
 	

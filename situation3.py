@@ -190,8 +190,6 @@ class Situation3:
 		buf += "BU".ljust(sp) + (str(round(100*frac_BU,2))+"%").ljust(sp) + "\n"
 		print(buf)		
 
-
-
 	def loadResults(self,filename):
 		f = open(filename,"r")
 		reader = csv.reader(f,delimiter=',')
@@ -213,7 +211,6 @@ class Situation3:
 				data_index += 1 #An empty row means next data
 
 		self.data_genBorda = np.array(self.data_genBorda)
-
 
 		f.close()
 
@@ -256,16 +253,7 @@ class Situation3:
 
 
 if __name__ == '__main__':
-	"""
-	n_items=9
-	BE=0
-	BS=0
-	BM=0
-	"""
-	#for n_items in range(6,13,3):
 	sit=Situation3(n_items=6)
-	#print(sit._problem)
-	#cProfile.run('sit.run(nb_iter=5000,verbose=False)')
 	sit.run(nb_iter=100,verbose=False)
 	sit.printResults()
 	sit.printResultsAllProperties()
